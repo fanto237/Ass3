@@ -23,12 +23,12 @@ public:
 
 private:
     static const unsigned MAX = 512;
-    unsigned m_Count [MAX];
-    int m_Dad [MAX];
-    unsigned m_Code [MAX/2];
-    unsigned m_Len[MAX/2];
-    int m_Left[MAX];
-    int m_Right[MAX];
+    unsigned m_Count [MAX]{};
+    int m_Dad [MAX]{};
+    unsigned m_Code [MAX/2]{};
+    unsigned m_Len[MAX/2]{};
+    int m_Left[MAX]{};
+    int m_Right[MAX]{};
     unsigned m_Root = -1;
     const std::string filename;
 
@@ -36,11 +36,12 @@ private:
 
     void binToString(const std::string &arg);
 
-    static void modify(char &n, int p, int b);
-
     void setTree(std::fstream &out);
 
-    void reproducedTree(std::fstream &in);
+    void genTree(std::fstream &in);
+
+    static void change(char &n, int p, int b);
+
 
 };
 

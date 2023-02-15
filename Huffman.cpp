@@ -85,7 +85,7 @@ void Huffman::binToString(const std::string &arg) {
     char c;
     out.write(reinterpret_cast<const char *>(&counter), sizeof(char));
     for (auto &&ui: vector) {
-        modify(c, 7 - bit, ui);
+        change(c, 7 - bit, ui);
         ++bit;
         if (bit > 0 && bit % 8 == 0) {
             bit = 0;
@@ -111,16 +111,11 @@ void Huffman::setTree(std::fstream &out) {
     out.write(c, sizeof(short));
 }
 
-void Huffman::modify(char &n, int p, int b) {
-    int mask = 1 << p;
-    n = (n & ~mask) | (b << p);
-}
-
 
 void Huffman::decompress() {
     std::fstream file(filename + ".bin", std::fstream::in | std::fstream::out | std::fstream::binary);
 
-    reproducedTree(file);
+    genTree(file);
     char c;
     char fillUpZeros = 0;
     file.read(reinterpret_cast<char *>(&fillUpZeros), sizeof(char));
@@ -138,7 +133,7 @@ void Huffman::decompress() {
     outp.close();
 }
 
-void Huffman::reproducedTree(std::fstream &in) {
+void Huffman::genTree(std::fstream &in) {
     char c[sizeof(short)];
     in.read(c, sizeof(short));
     unsigned iDx = 1;
@@ -158,6 +153,11 @@ void Huffman::reproducedTree(std::fstream &in) {
     }
 }
 
+
+void Huffman::change(char &n, int p, int b) {
+    int mask = 1 << p;
+    n = (n & ~mask) | (b << p);
+}
 
 
 

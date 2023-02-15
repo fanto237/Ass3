@@ -13,4 +13,4 @@ set(CMAKE_CXX_FLAGS -Wfatal-errors)
 set(CMAKE_CXX_FLAGS -std=c++17)
 
 
-add_executable(Ass3 main.cpp)
+add_executable(Ass3 main.cpp Huffman.cpp Huffman.h PriorityHeap.h Diff.cpp Diff.h)
